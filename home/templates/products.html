@@ -8,5 +8,12 @@
 </head>
 <body>
     <h1>Productos Legales</h1>
+    <ul>
+        {% for p in products %}
+            <li>
+                <p>{{p.name}} : {{p.price}} : {{p.stock}} : {{p.description}}</p>
+            </li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
