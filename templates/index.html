@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+E-COMMERCE
+{% endblock %}
+
+{% block content %}
+<h1>Bienvenido a E-COMMERCE</h1>
+
+<ul>
+    {% for p in products %}
+    <li>{{ p }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

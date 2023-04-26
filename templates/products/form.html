@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block title %} E-COMMERCE Create_Product {% endblock %} 
+{% block content %}
+<h1>Productos legales</h1>
+<h4>Registro de productos</h4>
+
+<form action="" method="post">
+  {% csrf_token %} {{form}}
+  <button type="submit">GUARDAR</button>
+</form>
+
+{% endblock %}

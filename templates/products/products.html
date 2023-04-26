@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block title %} E-COMMERCE Products {% endblock %}
+{% block content %}
+<h1>Productos legales</h1>
+<div>
+  <table>
+    <tr>
+      <td>ID</td>
+      <td>NAME</td>
+      <td>PRICE</td>
+      <td>STOCK</td>
+      <td>DESCRIPTION</td>
+      <td>BRAND</td>
+      <td></td>
+    </tr>
+    {% for p in products %}
+    <tr>
+      <td>{{p.id}}</td>
+      <td>{{p.name}}</td>
+      <td>{{p.price}}</td>
+      <td>{{p.stock}}</td>
+      <td>{{p.description}}</td>
+      <td>{{p.brand}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}
