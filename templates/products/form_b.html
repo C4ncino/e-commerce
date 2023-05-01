@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %} E-COMMERCE Create_Product {% endblock %}
+
+{% block content %}
+<div class="d-flex flex-row justify-content-between mx-5">
+    <h3 class="ms-5">Marcas Registradas</h3>
+</div>
+<div class="w-50 mx-auto m-4">
+    <h4 class="d-inline">Registro de marcas</h4>
+    <form class="d-flex flex-column m-0" action="" method="post">
+        {% csrf_token %} {{form}}
+        <button class="mt-3" type="submit">GUARDAR</button>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,27 +1,43 @@
-{% extends 'base.html' %} {% block title %} E-COMMERCE Products {% endblock %}
+{% extends 'base.html' %}
+
+{% block title %} E-COMMERCE Products {% endblock %}
+
 {% block content %}
-<h1>Productos legales</h1>
-<div>
-  <table>
-    <tr>
-      <td>ID</td>
-      <td>NAME</td>
-      <td>PRICE</td>
-      <td>STOCK</td>
-      <td>DESCRIPTION</td>
-      <td>BRAND</td>
-      <td></td>
-    </tr>
-    {% for p in products %}
-    <tr>
-      <td>{{p.id}}</td>
-      <td>{{p.name}}</td>
-      <td>{{p.price}}</td>
-      <td>{{p.stock}}</td>
-      <td>{{p.description}}</td>
-      <td>{{p.brand}}</td>
-    </tr>
-    {% endfor %}
-  </table>
+<div class="w-100 p-0">
+  <div class="d-flex flex-row justify-content-between mx-5">
+    <h3 class="ms-5">Productos legales</h3>
+    <a class="me-5 btn btn-outline-success rounded-3 text-success" href="/products/create">
+      <i class="bi bi-plus fs-3"></i> </a>
+  </div>
+  <div class="w-75 mx-auto mt-3">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope=" col">ID</th>
+          <th scope="col">NAME</th>
+          <th scope="col">PRICE</th>
+          <th scope="col">STOCK</th>
+          <th scope="col">DESCRIPTION</th>
+          <th scope="col">BRAND</th>
+          <th scope="col">EDIT</th>
+          <th scope="col">DELETE</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in products %}
+        <tr>
+          <th scope="row">{{p.id}}</th>
+          <td>{{p.name}}</td>
+          <td>{{p.price}}</td>
+          <td>{{p.stock}}</td>
+          <td>{{p.description}}</td>
+          <td>{{p.brand}}</td>
+          <td><a href="update/{{p.id}}"> <i class="bi bi-pencil fs-5 text-warning"></i> </a></td>
+          <td><a href="delete/{{p.id}}"><i class="bi bi-x-square fs-5 text-danger"></i></a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 {% endblock %}
