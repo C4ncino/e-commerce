@@ -2,6 +2,43 @@
 
 {% block title %} E-COMMERCE {% endblock %} 
 
+
+{% block NavBar %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <a class="navbar-brand fs-3 m-2" href="/">Django Ecommerce</a>
+
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
+                  <a class="nav-link fs-5" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
+                  <a class="nav-link fs-5" href="/products">Products</a>
+              </li>
+          </ul>
+      </div>
+
+      <div class="border-start border-2 ps-3 ms-3 d-flex flex-row align-items-center" style="height: 3.5rem;">
+        <a href='#' class="btn btn-outline-primary me-3 fs-6" name="logIn">
+          Inicia Sesión
+        </a>
+        <a href='#' class="btn btn-outline-primary ms-2 fs-6" name="signIn">
+          Crear Cuenta
+        </a>
+      </div>
+
+      
+  </div>
+</nav>
+{% endblock %}
+
 {% block content %}
 <div class="container text-center">
   <h3>Bienvenido a E-COMMERCE</h3>
