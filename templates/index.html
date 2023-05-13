@@ -11,7 +11,7 @@
           aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
       </button>
-
+      
       <a class="navbar-brand fs-3 m-2" href="/">Django Ecommerce</a>
 
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
@@ -23,26 +23,25 @@
                   <a class="nav-link fs-5" href="/products">Products</a>
               </li>
           </ul>
-      </div>
-      {% if user.is_authenticated %}
-        <div class="border-start border-2 ps-3 ms-3 d-flex flex-row align-items-center" style="height: 3.5rem;">
-          Hola {{user.username}} ! 
-          <a href="{% url 'logout' %}" class="btn btn-outline-primary ms-2 fs-6" name="logout">
-            Cerrar Sesión
-          </a>
-        </div>
-      {% else %}
-        <div class="border-start border-2 ps-3 ms-3 d-flex flex-row align-items-center" style="height: 3.5rem;">
-          <a href="{% url 'login' %}" class="btn btn-outline-primary me-3 fs-6" name="logIn">
-            Inicia Sesión
-          </a>
-          <a href="{% url 'register_user' %}" class="btn btn-outline-primary ms-2 fs-6" name="signIn">
-            Crear Cuenta
-          </a>
-        </div>
-      {% endif %}
 
-      
+          {% if user.is_authenticated %}
+            <div class="border-start border-2 ps-3 ms-2 d-flex flex-row align-items-center" style="height: 3.5rem;">
+              Hola {{user.username}} ! 
+              <a href="{% url 'logout' %}" class="btn btn-outline-primary ms-2 fs-6" name="logout">
+                Cerrar Sesión
+              </a>
+            </div>
+          {% else %}
+            <div class="border-start border-2 ps-3 ms-2 d-flex flex-row align-items-center" style="height: 3.5rem;">
+              <a href="{% url 'login' %}" class="btn btn-outline-primary me-3 fs-6" name="logIn">
+                Inicia Sesión
+              </a>
+              <a href="{% url 'register_user' %}" class="btn btn-outline-primary ms-2 fs-6" name="signIn">
+                Crear Cuenta
+              </a>
+            </div>
+          {% endif %}
+      </div>
   </div>
 </nav>
 {% endblock %}
