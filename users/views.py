@@ -97,4 +97,19 @@ class Register(View):
             login(request, user)
             messages.success(request, ("Registration Successful!"))
             return redirect('home')
+
+class Update(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            return render(request, "users/update_user.html", {})
+        else:
+            return redirect('login')
+        
+    def post(self, request):
+        newPassword = request.POST['password1']
+        current_user = UserA.objects.get(id=request.user.id)
+        current_user.set_password(newPassword)
+        current_user.save()
+        login(request, current_user)
+        return redirect('home')
         
