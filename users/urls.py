@@ -3,7 +3,11 @@ from .views import *
 
 urlpatterns = [
     path('', User.as_view(), name="users"),
-    path('login_user', Login.as_view(), name="login"),
-    path('logout_user', Logout.as_view(), name="logout"),
-    path('register_user', Register.as_view(), name="register_user"),
+    path('create', CreateUser.as_view(), name="create_user"),
+    path('update/<int:pk>', UpdateUser.as_view(), name="update_user"),
+    path('delete/<int:pk>', DeleteUser.as_view(), name="delete_user"),
+    
+    path('login', Login.as_view(), name="login"),
+    path('logout', Logout.as_view(), name="logout"),
+    path('register', Register.as_view(), name="register_user"),
 ]

@@ -1,10 +1,10 @@
 {% extends 'base.html' %} 
 
-{% block title %} LOGIN {% endblock %} 
+{% block title %} Log In {% endblock %} 
 
 {% block content %}
 <div class="d-flex flex-column align-items-center text-center mt-5">
-    <h3>LOGIN</h3>
+    <h3>Log In</h3>
 
     <form class='w-50' action="" method=POST>
         {% csrf_token %}
@@ -31,6 +31,8 @@
             Not an Accout yet? 
             <a href="{% url 'register_user' %}">Register</a>
         </a>
+        <br>
+        <a class='text-danger' href="{% url 'home' %}"> Cancel</a>
     </div>
 
 

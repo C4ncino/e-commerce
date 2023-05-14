@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %} E-COMMERCE Products {% endblock %}
+{% block title %} E-COMMERCE Users {% endblock %}
 
 
 {% block NavBar %}
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-transparent">
   <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false"
@@ -12,7 +12,7 @@
           <span class="navbar-toggler-icon"></span>
       </button>
       
-      <a class="navbar-brand fs-3 m-2" href="/">Django Ecommerce</a>
+      <a class="navbar-brand fs-3 m-2" href="/">Djanmmerce</a>
 
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -56,7 +56,7 @@
 <div class="w-100 p-0">
   <div class="d-flex flex-row justify-content-between mx-5">
     <h3 class="ms-5">Usuarios</h3>
-    <a class="me-5 btn btn-outline-success rounded-3 text-success" href="/products/create">
+    <a class="me-5 btn btn-outline-success rounded-3 text-success" href="{% url 'create_user' %}">
       <i class="bi bi-plus fs-3"></i> </a>
   </div>
   <div class="w-75 mx-auto mt-3">
@@ -65,6 +65,7 @@
         <tr>
           <th scope=" col">ID</th>
           <th scope="col">NAME</th>
+          <th scope="col">EMAIL</th>
           <th scope="col">EDIT</th>
           <th scope="col">DELETE</th>
         </tr>

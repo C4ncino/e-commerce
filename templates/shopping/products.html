@@ -1,6 +1,6 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 
-{% block title %} E-COMMERCE Create Product {% endblock %}
+{% block title %} E-COMMERCE {% endblock %} 
 
 
 {% block NavBar %}
@@ -20,22 +20,19 @@
                   <a class="nav-link fs-5" aria-current="page" href="{% url 'home' %}">Home</a>
               </li>
               <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
-                  <a class="nav-link fs-5" href="{% url 'product' %}">Products</a>
+                  <a class="nav-link fs-5" href="{% url 'shopping' %}">Products</a>
               </li>
               <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
-                  <a class="nav-link fs-5" href="{% url 'brands' %}">Brands</a>
-              </li>
-              <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
-                  <a class="nav-link fs-5" href="{% url 'users' %}">Users</a>
+                  <a class="nav-link fs-5" href="/products">Cart</a>
               </li>
           </ul>
 
           {% if user.is_authenticated %}
             Hi {{user.username}} ! 
             <div class="border-start border-2 ps-3 ms-2 d-flex flex-row align-items-center" style="height: 3.5rem;">
-              <a href="{% url 'logout' %}" class="btn btn-outline-danger ms-2 fs-6" name="logout">
+                <a href="{% url 'logout' %}" class="btn btn-outline-danger ms-2 fs-6" name="logout">
                 Log Out
-              </a>
+                </a>
             </div>
           {% else %}
             <div class="border-start border-2 ps-3 ms-2 d-flex flex-row align-items-center" style="height: 3.5rem;">
@@ -53,15 +50,25 @@
 {% endblock %}
 
 {% block content %}
-<div class="d-flex flex-row justify-content-between mx-5">
-  <h3 class="ms-5">Productos legales</h3>
+<div class="container text-center">
+  <h3>Our Products</h3>
 </div>
-<div class="w-50 mx-auto m-4">
-  <h4 class="d-inline">Registro de productos</h4>
-  <form class="d-flex flex-column m-0" action="" method="post">
-    {% csrf_token %} {{form}}
-    <button class="mt-3" type="submit">GUARDAR</button>
-  </form>
+<div class='d-flex flex-row w-75 mx-auto flex-wrap my-5 py-3'>
+  {% for p in products %}
+  {% if p.stock > 0 %}
+    <div class="card text-center" style="width: 18rem;">
+      <div class="card-header">
+        <h4>{{p.name}}</h4>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{p.price}}</h5>
+        <p class="card-text">{{p.brand}} - {{p.description}}</p>
+      </div>
+      <div class="card-footer text-muted">
+        <a href="#" class="btn btn-primary">Add to cart</a>
+      </div>
+    </div>
+  {% endif %}
+  {% endfor %}
 </div>
-
 {% endblock %}

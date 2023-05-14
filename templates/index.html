@@ -4,7 +4,7 @@
 
 
 {% block NavBar %}
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-transparent">
   <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false"
@@ -12,7 +12,7 @@
           <span class="navbar-toggler-icon"></span>
       </button>
       
-      <a class="navbar-brand fs-3 m-2" href="/">Djangommerce</a>
+      <a class="navbar-brand fs-3 m-2" href="/">Djanmmerce</a>
 
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -20,7 +20,7 @@
                   <a class="nav-link fs-5" aria-current="page" href="{% url 'home' %}">Home</a>
               </li>
               <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
-                  <a class="nav-link fs-5" href="/products">Products</a>
+                  <a class="nav-link fs-5" href="{% url 'shopping' %}">Products</a>
               </li>
               <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
                   <a class="nav-link fs-5" href="/products">Cart</a>
@@ -51,6 +51,6 @@
 
 {% block content %}
 <div class="container text-center">
-  <h3>Bienvenido a E-COMMERCE</h3>
+  <h3>Welcome to Djanmmerce</h3>
 </div>
 {% endblock %}

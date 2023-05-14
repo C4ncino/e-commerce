@@ -4,7 +4,7 @@
 
 
 {% block NavBar %}
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-transparent">
   <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false"
@@ -12,7 +12,7 @@
           <span class="navbar-toggler-icon"></span>
       </button>
       
-      <a class="navbar-brand fs-3 m-2" href="/">Django Ecommerce</a>
+      <a class="navbar-brand fs-3 m-2" href="/">Djanmmerce</a>
 
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -56,7 +56,7 @@
 {% block content %}
 <div class="d-flex flex-row justify-content-between mx-5">
   <h3 class="ms-5">Marcas Registradas</h3>
-  <a class="me-5 btn btn-outline-success" href="brand/create">
+  <a class="me-5 btn btn-outline-success" href="{% url 'create_brand' %}">
     <i class="bi bi-plus fs-3 text-success"></i>
   </a>
 </div>
@@ -75,8 +75,8 @@
       <tr>
         <th scope="row">{{b.id}}</th>
         <td>{{b.name}}</td>
-        <td><a href="brand/update/{{b.id}}"> <i class="bi bi-pencil fs-5 text-warning"></i> </a></td>
-        <td><a href="brand/delete/{{b.id}}"><i class="bi bi-x-square fs-5 text-danger"></i></a></td>
+        <td><a href="{% url 'update_brand' b.id %}"> <i class="bi bi-pencil fs-5 text-warning"></i> </a></td>
+        <td><a href="{% url 'delete_brand' b.id %}"><i class="bi bi-x-square fs-5 text-danger"></i></a></td>
       </tr>
       {% endfor %}
     </tbody>

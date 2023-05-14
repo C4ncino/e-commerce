@@ -4,15 +4,60 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User as UserA
+from .forms import UserCreate
 
 # Create your views here.
+# CRUD USERS
 class User(View):
     def get(self, request):
         users = UserA.objects.all()
         context = {'users' : users}
-        print(context)
         return render(request, 'users/users.html', context)
 
+class CreateUser(View):
+    def get(self, request):
+        form = UserCreate()
+        context = {'form': form}
+        return render(request, 'users/form.html', context)
+    
+    def post(self, request):
+        form = UserCreate(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('users')
+        else:
+            print("FORM ERROR!")
+            print(form.errors)
+            return render(request, 'users/form.html', {'form': form})
+
+class UpdateUser(View):  
+    def get(self, request, pk):
+        user = UserA.objects.get(id=pk)
+        form = UserCreate(instance = user)
+
+        context = {'form': form}
+        return render(request, 'users/form.html', context)
+          
+    def post(self, request, pk):
+        user = UserA.objects.get(id=pk)
+        form = UserCreate(request.POST, instance=user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('users')
+        else:
+            print("FORM ERROR!")
+            print(form.errors.as_data())
+            return render(request, 'user/form.html', {'form': form})
+    
+class DeleteUser(View):  
+    def get(self, request, pk):
+        user = UserA.objects.get(id=pk)
+        user.delete()
+        
+        return redirect('users')
+
+# Authentication
 class Login(View):
     def get(self, request):
         return render(request, 'users/login.html', {})
