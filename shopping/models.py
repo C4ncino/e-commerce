@@ -1,6 +1,6 @@
 from django.db import models
-from users.models import User
 from products.models import Product
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Cart(models.Model):

@@ -8,6 +8,7 @@ class Products(View):
     def get(self, request):
         products = Product.objects.all()
         context = {'products': products}
+        print(context)
         return render(request, 'products/products.html', context)
     
 class CreateProduct(View):
