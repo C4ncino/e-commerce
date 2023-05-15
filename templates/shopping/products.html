@@ -1,6 +1,6 @@
 {% extends 'base.html' %} 
 
-{% block title %} E-COMMERCE {% endblock %} 
+{% block title %} Djanmmerce {% endblock %} 
 
 
 {% block NavBar %}
@@ -23,10 +23,10 @@
                   <a class="nav-link fs-5" href="{% url 'shopping' %}">Products</a>
               </li>
               <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
-                  <a class="nav-link fs-5" href="{% url 'cart' user.id %}">Cart</a>
+                  <a class="nav-link fs-5" href="{% url 'cart' %}">Cart</a>
               </li>
               <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
-                  <a class="nav-link fs-5" href="/products">Record</a>
+                <a class="nav-link fs-5" href="{% url 'record' %}">Record</a>
               </li>
           </ul>
 
@@ -68,7 +68,7 @@
         <p class="card-text">{{p.brand}} - {{p.description}}</p>
       </div>
       <div class="card-footer text-muted">
-        <a href="#" class="btn btn-primary">Add to cart</a>
+        <a href="{% url 'add_product' p.id %}" class="btn btn-primary">Add to cart</a>
       </div>
     </div>
   {% endif %}
