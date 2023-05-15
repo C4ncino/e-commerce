@@ -5,7 +5,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group, Permission, User as UserA
 from .forms import UserCreate
-from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from .permissions import STAFF, CLIENT, STAFF_PERMS
 

@@ -4,3 +4,14 @@
     /* font-family: 'Ubuntu'; */
     /* font-family: 'Roboto'; */
 }
+
+.formR {
+    display: flex;
+    flex-direction: column;
+}
+
+.formR p{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}

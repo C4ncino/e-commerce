@@ -9,9 +9,9 @@
 {% endif %}
 
 <div class="d-flex flex-column align-items-center mx-5 mt-5">
-    <h3>Sign In</h3>
+    <h3>Sign Up</h3>
 
-    <form action="{% url 'register_4dm1n' %}" class='d-flex flex-column' method=POST>
+    <form action="{% url 'register_4dm1n' %}" class='formR' method=POST>
         {% csrf_token %}
 
         {{ form.as_p }}

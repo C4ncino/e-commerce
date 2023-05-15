@@ -1,68 +1,67 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
-{% block title %} Djanmmerce {% endblock %} 
+{% block title %} Djanmmerce {% endblock %}
 
 
 {% block NavBar %}
 <nav class="navbar navbar-expand-lg bg-transparent">
   <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-          data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-      
-      <a class="navbar-brand fs-3 m-2" href="/">Djanmmerce</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+      aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
-                  <a class="nav-link fs-5" aria-current="page" href="{% url 'home' %}">Home</a>
-              </li>
-              {% if user_group == 'Client' or user_group == '' %}
-                <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
-                    <a class="nav-link fs-5" href="{% url 'shopping' %}">Products</a>
-                </li>
-                <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
-                    <a class="nav-link fs-5" href="{% url 'cart' %}">Cart</a>
-                </li>
-                <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
-                    <a class="nav-link fs-5" href="{% url 'record' %}">Record</a>
-                </li>
-              {% elif user_group == 'Staff' %} 
-                <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
-                  <a class="nav-link fs-5" href="{% url 'product' %}">Products</a>
-                </li>
-                <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
-                    <a class="nav-link fs-5" href="{% url 'brands' %}">Brands</a>
-                </li>
-                <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
-                    <a class="nav-link fs-5" href="{% url 'users' %}">Users</a>
-                </li>
-              {% endif %}
-          </ul>
+    <a class="navbar-brand fs-3 m-2" href="/">Djanmmerce</a>
 
-          {% if user.is_authenticated %}
-            Hi {{user.username}} ! 
-            <div class="border-start border-2 ps-3 ms-2 d-flex flex-row align-items-center" style="height: 3.5rem;">
-              <a href="{% url 'updateU' %}" class="btn btn-outline-secondary ms-2 fs-6" name="changePassword">
-                Change password
-              </a>
-              <a href="{% url 'logout' %}" class="btn btn-outline-danger ms-2 fs-6" name="logout">
-                Log Out
-              </a>
-            </div>
-            {% else %}
-            <div class="border-start border-2 ps-3 ms-2 d-flex flex-row align-items-center" style="height: 3.5rem;">
-              <a href="{% url 'login' %}" class="btn btn-outline-primary me-3 fs-6" name="logIn">
-                Log In
-              </a>
-              <a href="{% url 'register_user' %}" class="btn btn-outline-primary ms-2 fs-6" name="signIn">
-                Sign Up
-              </a>
-            </div>
-          {% endif %}
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
+          <a class="nav-link fs-5" aria-current="page" href="{% url 'home' %}">Home</a>
+        </li>
+        {% if user_group == 'Client' or user_group == '' %}
+        <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
+          <a class="nav-link fs-5" href="{% url 'shopping' %}">Products</a>
+        </li>
+        <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
+          <a class="nav-link fs-5" href="{% url 'cart' %}">Cart</a>
+        </li>
+        <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
+          <a class="nav-link fs-5" href="{% url 'record' %}">Record</a>
+        </li>
+        {% elif user_group == 'Staff' %}
+        <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
+          <a class="nav-link fs-5" href="{% url 'product' %}">Products</a>
+        </li>
+        <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
+          <a class="nav-link fs-5" href="{% url 'brands' %}">Brands</a>
+        </li>
+        <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
+          <a class="nav-link fs-5" href="{% url 'users' %}">Users</a>
+        </li>
+        {% endif %}
+      </ul>
+
+      {% if user.is_authenticated %}
+      Hi {{user.username}} !
+      <div class="border-start border-2 ps-3 ms-2 d-flex flex-row align-items-center" style="height: 3.5rem;">
+        <a href="{% url 'updateU' %}" class="btn btn-outline-secondary ms-2 fs-6" name="changePassword">
+          Change password
+        </a>
+        <a href="{% url 'logout' %}" class="btn btn-outline-danger ms-2 fs-6" name="logout">
+          Log Out
+        </a>
       </div>
+      {% else %}
+      <div class="border-start border-2 ps-3 ms-2 d-flex flex-row align-items-center" style="height: 3.5rem;">
+        <a href="{% url 'login' %}" class="btn btn-outline-primary me-3 fs-6" name="logIn">
+          Log In
+        </a>
+        <a href="{% url 'register_user' %}" class="btn btn-outline-primary ms-2 fs-6" name="signIn">
+          Sign Up
+        </a>
+      </div>
+      {% endif %}
+    </div>
   </div>
 </nav>
 {% endblock %}
@@ -70,5 +69,24 @@
 {% block content %}
 <div class="container text-center">
   <h3>Welcome to Djanmmerce</h3>
+  <div class="my-5">
+    <h4>
+      Here you will find the best products at the best prices!
+    </h4>
+    <h5>
+      New Products Every Hour!
+    </h5>
+  </div>
+  <div class="d-flex flex-row justify-content-around flex-wrap my-4">
+    <div>
+      <h3>Shop Now!</h3>
+      <a href="{% url 'shopping' %}" class="btn btn-outline-success border border-3 border-success"><i
+          class="bi bi-cart fs-4"></i></a>
+    </div>
+    <div>
+      <h3>Need an Account?</h3>
+      <a href="{% url 'register_user' %}" class="btn btn-outline-primary border border-3 border-primary"> Sign UP </a>
+    </div>
+  </div>
 </div>
 {% endblock %}

@@ -33,6 +33,9 @@
           {% if user.is_authenticated %}
             Hi {{user.username}} ! 
             <div class="border-start border-2 ps-3 ms-2 d-flex flex-row align-items-center" style="height: 3.5rem;">
+              <a href="{% url 'updateU' %}" class="btn btn-outline-secondary ms-2 fs-6" name="changePassword">
+                Change password
+              </a>
               <a href="{% url 'logout' %}" class="btn btn-outline-danger ms-2 fs-6" name="logout">
                 Log Out
               </a>
