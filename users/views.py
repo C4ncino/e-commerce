@@ -3,18 +3,27 @@ from django.views import View
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User as UserA
+from django.contrib.auth.models import Group, Permission, User as UserA
 from .forms import UserCreate
+from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from .permissions import STAFF, CLIENT, STAFF_PERMS
 
 # Create your views here.
 # CRUD USERS
-class User(View):
+class User(PermissionRequiredMixin, View):
+    permission_required = STAFF_PERMS
+    raise_exception = True
+
     def get(self, request):
         users = UserA.objects.all()
         context = {'users' : users}
         return render(request, 'users/users.html', context)
 
-class CreateUser(View):
+class CreateUser(PermissionRequiredMixin, View):
+    permission_required = STAFF_PERMS
+    raise_exception = True
+
     def get(self, request):
         form = UserCreate()
         context = {'form': form}
@@ -30,7 +39,10 @@ class CreateUser(View):
             print(form.errors)
             return render(request, 'users/form.html', {'form': form})
 
-class UpdateUser(View):  
+class UpdateUser(PermissionRequiredMixin, View):  
+    permission_required = STAFF_PERMS
+    raise_exception = True
+
     def get(self, request, pk):
         user = UserA.objects.get(id=pk)
         form = UserCreate(instance = user)
@@ -49,8 +61,11 @@ class UpdateUser(View):
             print("FORM ERROR!")
             print(form.errors.as_data())
             return render(request, 'user/form.html', {'form': form})
+
+class DeleteUser(PermissionRequiredMixin, View):  
+    permission_required = STAFF_PERMS
+    raise_exception = True
     
-class DeleteUser(View):  
     def get(self, request, pk):
         user = UserA.objects.get(id=pk)
         user.delete()
@@ -81,6 +96,7 @@ class Logout(View):
 class Register(View):
     def get(self, request):
         form = UserCreationForm()
+
         return render(
             request, 
             'users/register_user.html', 
@@ -88,16 +104,62 @@ class Register(View):
         )
     
     def post(self, request):
-        form = UserCreationForm(request.POST)
+        form = UserCreationForm(request.POST) 
         if form.is_valid():
             form.save()
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
+
+            group = Group.objects.get_or_create(name="Client")
+            if group[1]:
+                for p in CLIENT:
+                    permission = Permission.objects.get(codename = p)
+                    user.user_permissions.add(permission)
+        
+            user.groups.add(group[0])
+            
             login(request, user)
             messages.success(request, ("Registration Successful!"))
             return redirect('home')
+        else:
+            messages.success(request, ("Something Went Wrong!"))
+            return redirect('register_user')
 
+class RegisterAdmin(View):
+    def get(self, request):
+        form = UserCreationForm()
+
+        return render(
+            request, 
+            'users/register_4dm1n.html', 
+            {'form':form,}
+        )
+    
+    def post(self, request):
+        form = UserCreationForm(request.POST) 
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
+
+            group = Group.objects.get_or_create(name="Staff")
+            if group[1]:
+                for p in STAFF:
+                    permission = Permission.objects.get(codename = p)
+                    user.user_permissions.add(permission)
+                    print(user.user_permissions.all())
+        
+            user.groups.add(group[0])
+            
+            login(request, user)
+            messages.success(request, ("Registration Successful!"))
+            return redirect('home')
+        else:
+            messages.success(request, ("Something Went Wrong!"))
+            return redirect('register_4dm1n')
+        
 class Update(View):
     def get(self, request):
         if request.user.is_authenticated:

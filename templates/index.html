@@ -19,15 +19,27 @@
               <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
                   <a class="nav-link fs-5" aria-current="page" href="{% url 'home' %}">Home</a>
               </li>
-              <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
-                  <a class="nav-link fs-5" href="{% url 'shopping' %}">Products</a>
-              </li>
-              <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
-                  <a class="nav-link fs-5" href="{% url 'cart' %}">Cart</a>
-              </li>
-              <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
-                  <a class="nav-link fs-5" href="{% url 'record' %}">Record</a>
-              </li>
+              {% if user_group == 'Client' or user_group == '' %}
+                <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
+                    <a class="nav-link fs-5" href="{% url 'shopping' %}">Products</a>
+                </li>
+                <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
+                    <a class="nav-link fs-5" href="{% url 'cart' %}">Cart</a>
+                </li>
+                <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
+                    <a class="nav-link fs-5" href="{% url 'record' %}">Record</a>
+                </li>
+              {% elif user_group == 'Staff' %} 
+                <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
+                  <a class="nav-link fs-5" href="{% url 'product' %}">Products</a>
+                </li>
+                <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
+                    <a class="nav-link fs-5" href="{% url 'brands' %}">Brands</a>
+                </li>
+                <li class="nav-item border-start border-2 ms-2 ps-2 py-1">
+                    <a class="nav-link fs-5" href="{% url 'users' %}">Users</a>
+                </li>
+              {% endif %}
           </ul>
 
           {% if user.is_authenticated %}
@@ -40,7 +52,7 @@
                 Log Out
               </a>
             </div>
-          {% else %}
+            {% else %}
             <div class="border-start border-2 ps-3 ms-2 d-flex flex-row align-items-center" style="height: 3.5rem;">
               <a href="{% url 'login' %}" class="btn btn-outline-primary me-3 fs-6" name="logIn">
                 Log In

@@ -10,5 +10,6 @@ urlpatterns = [
     path('login', Login.as_view(), name="login"),
     path('logout', Logout.as_view(), name="logout"),
     path('register', Register.as_view(), name="register_user"),
+    path('register/4dm1n', RegisterAdmin.as_view(), name="register_4dm1n"),
     path('updateU', Update.as_view(), name="updateU"),
 ]

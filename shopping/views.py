@@ -1,20 +1,28 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views import View
 from django.contrib.auth.models import User
 from products.models import Product
 from .models import Cart, Order
 from datetime import datetime as dt
+from users.permissions import CLIENT_PERMS
 
 # Create your views here.
 class Products(View):
     def get(self, request):
         products = Product.objects.all()
-        context = {'products': products}
+
+        try:
+            user_group = request.user.groups.all()[0].name
+        except:
+            user_group = ''
+
+        context = {'products': products, 'user_group' : user_group}
         return render(request, 'shopping/products.html', context)
 
-class CurrentCart(LoginRequiredMixin, View):
+class CurrentCart(PermissionRequiredMixin, View):
+    permission_required = CLIENT_PERMS
     login_url = "/users/login"
 
     def get(self, request):
@@ -25,7 +33,10 @@ class CurrentCart(LoginRequiredMixin, View):
         context = {'cart' : currentCart, 'orders' : orders, 'nOrders' : len(orders)}
         return render(request, 'shopping/cart.html', context)
 
-class AddProductToCart(View):
+class AddProductToCart(PermissionRequiredMixin, View):
+    permission_required = CLIENT_PERMS
+    login_url = "/users/login"
+
     def get(self, request, pk):
         user = User.objects.get(id = request.user.id)
         cart = Cart.objects.get_or_create(user = user, date__isnull = True)[0]
@@ -42,7 +53,10 @@ class AddProductToCart(View):
         messages.success(request, ("Product Added To Cart!"))
         return redirect('shopping')
     
-class DeleteProductFromCart(View):
+class DeleteProductFromCart(PermissionRequiredMixin, View):
+    permission_required = CLIENT_PERMS
+    login_url = "/users/login"
+    
     def get(self, request, pk):
         user = User.objects.get(id = request.user.id)
         cart = Cart.objects.get(user = user, date__isnull = True)
@@ -60,7 +74,10 @@ class DeleteProductFromCart(View):
         messages.success(request, ("Product Deleted From Cart!"))
         return redirect('cart')
 
-class Purchase(View):
+class Purchase(PermissionRequiredMixin, View):
+    permission_required = CLIENT_PERMS
+    login_url = "/users/login"
+    
     def get(self, request, pk):
         cart = Cart.objects.get(id = pk)
         now = dt.now()
@@ -71,7 +88,10 @@ class Purchase(View):
         messages.success(request, ("Purchase made Successfully!"))
         return redirect('record')
 
-class Record(View):
+class Record(PermissionRequiredMixin, View):
+    permission_required = CLIENT_PERMS
+    login_url = "/users/login"
+
     def get(self, request):
         user = User.objects.get(id = request.user.id)
         carts = Cart.objects.filter(user = user, date__isnull = False)
