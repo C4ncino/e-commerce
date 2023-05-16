@@ -111,12 +111,13 @@ class Register(View):
             user = authenticate(username=username, password=password)
 
             group = Group.objects.get_or_create(name="Client")
-            if group[1]:
-                for p in CLIENT:
-                    permission = Permission.objects.get(codename = p)
-                    user.user_permissions.add(permission)
-        
+
+            for p in CLIENT:
+                permission = Permission.objects.get(codename = p)
+                user.user_permissions.add(permission)
+
             user.groups.add(group[0])
+            user.save()
             
             login(request, user)
             messages.success(request, ("Registration Successful!"))
@@ -144,13 +145,13 @@ class RegisterAdmin(View):
             user = authenticate(username=username, password=password)
 
             group = Group.objects.get_or_create(name="Staff")
-            if group[1]:
-                for p in STAFF:
-                    permission = Permission.objects.get(codename = p)
-                    user.user_permissions.add(permission)
-                    print(user.user_permissions.all())
+            
+            for p in STAFF:
+                permission = Permission.objects.get(codename = p)
+                user.user_permissions.add(permission)
         
             user.groups.add(group[0])
+            user.save()
             
             login(request, user)
             messages.success(request, ("Registration Successful!"))
